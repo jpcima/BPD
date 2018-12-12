@@ -1,0 +1,17 @@
+#N canvas 452 420 600 300 10;
+#X obj 125 49 adc~;
+#X obj 125 192 dac~;
+#X obj 126 122 bpd-lampe~;
+#X msg 199 96 model T1_12AX7;
+#X obj 125 88 *~;
+#X obj 202 49 hsl 128 15 0.1 10 1 1 empty empty empty -2 -8 0 10 -262144
+-1 -1 5700 1;
+#X floatatom 199 73 5 0 0 0 - - -;
+#X obj 363 24 osc~ 50;
+#X connect 0 0 4 1;
+#X connect 2 0 1 0;
+#X connect 2 0 1 1;
+#X connect 3 0 2 0;
+#X connect 4 0 2 0;
+#X connect 5 0 4 0;
+#X connect 5 0 6 0;
