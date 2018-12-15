@@ -1,12 +1,13 @@
-#N canvas 138 166 1011 553 10;
+#N canvas 173 155 1011 553 10;
+#X declare -lib iemlib;
 #X obj 21 13 cnv 15 250 60 empty empty BassPreampDrive 20 12 0 20 -261234
 -66577 0;
-#X obj 137 231 bpd-eq-basses~;
+#X obj 242 120 bpd-eq-basses~;
 #X text 51 43 Préampli de basse Jujudusud;
-#X obj 137 266 bpd-eq-mediums~;
-#X obj 329 240 bpd-eq-hautes~;
+#X obj 206 150 bpd-eq-mediums~;
+#X obj 205 277 bpd-eq-hautes~;
 #X obj 129 372 send~ bpd-sortie;
-#X obj 269 122 receive~ bpd-entree;
+#X obj 302 45 receive~ bpd-entree;
 #X obj 565 296 cnv 15 400 200 empty empty Visuel 20 12 0 20 -232576
 -66577 0;
 #X obj 711 350 receive~ bpd-entree;
@@ -39,12 +40,12 @@
 #X text 599 190 volume sortie →;
 #X obj 812 157 *~;
 #X obj 700 135 hsl 128 15 0.01 10 1 1 empty empty empty -2 -8 0 10
--257985 -1 -1 9800 1;
+-257985 -1 -1 7300 1;
 #X text 598 133 volume entrée →;
 #X obj 159 336 *~;
-#X obj 41 299 receive bpd-wet;
-#X obj 329 338 *~;
-#X obj 236 309 receive bpd-dry;
+#X obj 98 278 receive bpd-wet;
+#X obj 35 239 *~;
+#X obj 35 162 receive bpd-dry;
 #X obj 298 394 cnv 15 240 140 empty empty Mélange 20 12 0 20 -261682
 -66577 0;
 #X obj 390 432 hsl 128 15 0.01 1 1 1 empty empty empty -2 -8 0 10 -260097
@@ -55,13 +56,71 @@
 #X obj 387 504 send bpd-dry;
 #X text 314 432 Son traité;
 #X text 302 485 Son original;
-#X obj 218 199 tgl 15 1 empty empty 30/40Hz 17 7 0 10 -262144 -1 -1
-0 1;
+#X obj 336 82 tgl 15 1 empty empty 30/40Hz 17 7 0 10 -262144 -1 -1
+1 1;
+#N canvas 138 375 531 389 subpatch 0;
+#X obj 24 260 bpd-lampe~;
+#X obj 23 200 *~;
+#X obj 23 355 outlet~;
+#X obj 57 109 inlet~;
+#X obj 286 247 samplerate~;
+#X obj 286 225 bng 15 250 50 1 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X floatatom 286 297 12 0 0 0 - - -;
+#X obj 66 199 inlet;
+#X obj 286 272 / 16;
+#X text 217 204 Configuration du filtre anti-repliement;
+#X text 314 224 ← initialisation;
+#X text 34 304 Anti-repliement;
+#X text 273 14 Suréchantillonnage *8;
+#X text 326 273 ← FNyquist / Suréchantillonnage;
+#X obj 11 12 cnv 15 208 66 empty empty Amplification à lampe 20
+12 0 14 -261682 -66577 0;
+#X obj 26 37 hsl 180 15 1 50 1 1 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X floatatom 23 57 5 0 0 0 - - -;
+#X obj 24 328 iemlib/lp3_butt~ 22050;
+#X obj 275 34 block~ 512 1 8;
+#X obj 116 109 outlet;
+#X connect 0 0 17 0;
+#X connect 1 0 0 0;
+#X connect 3 0 1 1;
+#X connect 4 0 8 0;
+#X connect 5 0 4 0;
+#X connect 7 0 0 0;
+#X connect 8 0 6 0;
+#X connect 8 0 17 1;
+#X connect 15 0 16 0;
+#X connect 15 0 19 0;
+#X connect 16 0 1 0;
+#X connect 17 0 2 0;
+#X coords 0 -1 1 1 210 70 2 10 10;
+#X restore 206 179 pd subpatch;
+#X msg 476 42 model T1_12AX7;
+#X msg 476 60 model T2_12AX7;
+#X msg 476 78 model T3_12AX7;
+#X msg 476 96 model T1_12AT7;
+#X msg 476 114 model T2_12AT7;
+#X msg 476 132 model T3_12AT7;
+#X msg 476 150 model T1_12AU7;
+#X msg 476 168 model T2_12AU7;
+#X msg 476 186 model T3_12AU7;
+#X msg 476 204 model T1_6V6;
+#X msg 476 222 model T2_6V6;
+#X msg 476 240 model T3_6V6;
+#X msg 476 258 model T1_6DJ8;
+#X msg 476 276 model T2_6DJ8;
+#X msg 476 294 model T3_6DJ8;
+#X msg 476 312 model T1_6C16;
+#X msg 476 330 model T2_6C16;
+#X msg 476 348 model T3_6C16;
+#X obj 58 489 declare -lib iemlib;
+#X text 56 469 Bibliothèque externe (filtres);
+#X obj 894 119 osc~ 440;
 #X connect 1 0 3 0;
-#X connect 3 0 35 1;
+#X connect 3 0 47 0;
 #X connect 4 0 35 1;
 #X connect 6 0 1 0;
-#X connect 6 0 4 0;
 #X connect 6 0 37 1;
 #X connect 8 0 11 0;
 #X connect 9 0 11 1;
@@ -83,3 +142,22 @@
 #X connect 40 0 41 0;
 #X connect 42 0 43 0;
 #X connect 46 0 1 1;
+#X connect 47 0 4 0;
+#X connect 48 0 47 1;
+#X connect 49 0 47 1;
+#X connect 50 0 47 1;
+#X connect 51 0 47 1;
+#X connect 52 0 47 1;
+#X connect 53 0 47 1;
+#X connect 54 0 47 1;
+#X connect 55 0 47 1;
+#X connect 56 0 47 1;
+#X connect 57 0 47 1;
+#X connect 58 0 47 1;
+#X connect 59 0 47 1;
+#X connect 60 0 47 1;
+#X connect 61 0 47 1;
+#X connect 62 0 47 1;
+#X connect 63 0 47 1;
+#X connect 64 0 47 1;
+#X connect 65 0 47 1;
