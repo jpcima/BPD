@@ -1,4 +1,5 @@
-#N canvas 540 63 822 640 10;
+#N canvas 427 108 822 640 10;
+#X declare -lib iemlib;
 #X obj 127 48 adc~ 1;
 #X obj 124 568 dac~ 1;
 #X obj 126 218 vtbdi-pr~;
@@ -21,12 +22,12 @@
 #X obj 52 255 *~;
 #X obj 127 168 *~;
 #X obj 124 346 +~;
-#X msg 383 70 0.5;
-#N canvas 358 184 612 519 drive 0;
+#X msg 362 157 0.5;
+#N canvas 138 184 612 519 drive 0;
 #X obj 83 123 bpd-lampe~;
 #X obj 83 100 *~;
 #X obj 85 395 outlet~;
-#X obj 97 74 inlet~;
+#X obj 73 29 inlet~;
 #X obj 286 247 samplerate~;
 #X obj 286 225 bng 15 250 50 1 empty empty empty 17 7 0 10 -262144
 -1 -1;
@@ -37,7 +38,7 @@
 #X text 227 368 Anti-repliement;
 #X text 267 35 Suréchantillonnage *8;
 #X text 326 273 ← FNyquist / Suréchantillonnage;
-#X floatatom 34 72 5 0 0 0 - - -;
+#X floatatom 118 75 5 0 0 0 - - -;
 #X obj 86 368 iemlib/lp3_butt~ 22050;
 #X obj 269 55 block~ 512 1 8;
 #X msg 115 102 model T1_12AX7;
@@ -49,9 +50,17 @@
 #X obj 81 325 bpd-lampe~;
 #X obj 68 303 *~;
 #X msg 97 303 model T3_12AX7;
-#X floatatom 41 270 5 0 0 0 - - -;
-#X obj 41 250 inlet;
-#X obj 34 50 inlet;
+#X floatatom 151 269 5 0 0 0 - - -;
+#X obj 151 249 inlet;
+#X obj 118 53 inlet;
+#X obj 270 100 declare -lib iemlib;
+#X text 268 80 Bibliothèque externe (filtres);
+#X obj 165 78 bng 15 250 50 1 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 144 159 bng 15 250 50 1 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 189 283 bng 15 250 50 1 empty empty empty 17 7 0 10 -262144
+-1 -1;
 #X connect 0 0 17 0;
 #X connect 1 0 0 0;
 #X connect 3 0 1 1;
@@ -74,14 +83,22 @@
 #X connect 25 0 23 0;
 #X connect 26 0 25 0;
 #X connect 27 0 13 0;
+#X connect 30 0 16 0;
+#X connect 31 0 21 0;
+#X connect 32 0 24 0;
 #X restore 139 299 pd drive;
-#X obj 190 240 hsl 128 15 0 1 0 1 empty empty PREGAIN -2 -8 0 10 -262144
+#X obj 190 240 hsl 128 15 0.1 10 1 1 empty empty PREGAIN -2 -8 0 10
+-262144 -1 -1 6350 1;
+#X obj 190 271 hsl 128 15 0.1 10 1 1 empty empty GAIN -2 -8 0 10 -262144
 -1 -1 6350 1;
-#X obj 190 271 hsl 128 15 0 1 0 1 empty empty GAIN -2 -8 0 10 -262144
--1 -1 6350 1;
+#X msg 362 209 1;
+#X obj 362 132 bng 15 250 50 1 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 362 187 bng 15 250 50 1 empty empty empty 17 7 0 10 -262144
+-1 -1;
 #X connect 0 0 14 0;
 #X connect 0 0 15 0;
-#X connect 2 0 18 2;
+#X connect 2 0 18 0;
 #X connect 3 0 4 0;
 #X connect 4 0 1 0;
 #X connect 5 0 4 1;
@@ -103,5 +120,9 @@
 #X connect 17 0 5 0;
 #X connect 17 0 6 0;
 #X connect 18 0 16 1;
-#X connect 19 0 18 0;
-#X connect 20 0 18 1;
+#X connect 19 0 18 1;
+#X connect 20 0 18 2;
+#X connect 21 0 19 0;
+#X connect 21 0 20 0;
+#X connect 22 0 17 0;
+#X connect 23 0 21 0;

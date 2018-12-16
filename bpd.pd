@@ -1,4 +1,4 @@
-#N canvas 173 155 1011 553 10;
+#N canvas 138 155 1011 553 10;
 #X declare -lib iemlib;
 #X obj 21 13 cnv 15 250 60 empty empty BassPreampDrive 20 12 0 20 -261234
 -66577 0;
@@ -58,7 +58,7 @@
 #X text 302 485 Son original;
 #X obj 336 82 tgl 15 1 empty empty 30/40Hz 17 7 0 10 -262144 -1 -1
 1 1;
-#N canvas 138 375 531 389 subpatch 0;
+#N canvas 683 358 531 389 subpatch 0;
 #X obj 24 260 bpd-lampe~;
 #X obj 23 200 *~;
 #X obj 23 355 outlet~;
@@ -82,6 +82,8 @@
 #X obj 24 328 iemlib/lp3_butt~ 22050;
 #X obj 275 34 block~ 512 1 8;
 #X obj 116 109 outlet;
+#X obj 277 96 declare -lib iemlib;
+#X text 275 76 Bibliothèque externe (filtres);
 #X connect 0 0 17 0;
 #X connect 1 0 0 0;
 #X connect 3 0 1 1;
@@ -114,8 +116,6 @@
 #X msg 476 312 model T1_6C16;
 #X msg 476 330 model T2_6C16;
 #X msg 476 348 model T3_6C16;
-#X obj 58 489 declare -lib iemlib;
-#X text 56 469 Bibliothèque externe (filtres);
 #X obj 894 119 osc~ 440;
 #X connect 1 0 3 0;
 #X connect 3 0 47 0;
